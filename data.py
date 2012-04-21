@@ -186,6 +186,7 @@ else:
 
 print """
     <p><a href="./index.html">Start again</a></p>
+    <p>Data supplied by the <a href="http://www.energysavingtrust.org.uk/">Energy Saving Trust</a>.</p>
 </body>
 </html>"""
 
