@@ -161,6 +161,7 @@ print """<html>
 <head>
     <title>The data</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" type="text/css" href="main.css" />
 </head>
 <body>
     <h1>Suggestions for making your home more energy efficient</h1>

@@ -1,0 +1,22 @@
+/*
+Main CSS file
+*/
+
+table {
+    border: 2px solid #060;
+}
+table th {
+    background-color: #060;
+    color: white;
+}
+table tr:nth-child(2n+1) td {
+    background-color: #cfc;
+}
+
+form div p:first-child {
+    background-color: #060;
+    color: white;
+    padding: .2em;
+    font-weight: bold;
+}
+

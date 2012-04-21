@@ -2,33 +2,40 @@
 <head>
     <title>Your House</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" type="text/css" href="main.css" />
 </head>
 <body>
     <h1>Making your home more energy efficient</h1>
     <p>Making your house more energy efficient makes sense. But where should you start?
     Input the details of your own house in the form below and find out!</p>
     <form name="input" action="./data.py" method="post">
+    <div>
     <p>Is your loft insulated?</p>
     <p><input type="radio" name="loft" value="yes270" />Yes, 270mm or more</p>
     <p><input type="radio" name="loft" value="yes100" />Yes, 100mm</p>
     <p><input type="radio" name="loft" value="no" />No</p>
     <p><input type="radio" name="loft" value="dontknow" />I don't know</p>
+    </div><div>
     <p>Have you got cavity walls or solid walls?</p>
     <p><input type="radio" name="walls" value="cavity" />Cavity walls</p>
     <p><input type="radio" name="walls" value="solid" />Solid walls</p>
     <p><input type="radio" name="walls" value="dontknow" />I don't know</p>
+    </div><div>
     <p>Have you got double glazing?</p>
     <p><input type="radio" name="dglazing" value="yes" />Yes</p>
     <p><input type="radio" name="dglazing" value="no" />No</p>
     <p><input type="radio" name="dglazing" value="dontknow" />I don't know</p>
+    </div><div>
     <p>Do you have radiator panels installed?</p>
     <p><input type="radio" name="radiator" value="yes" />Yes</p>
     <p><input type="radio" name="radiator" value="no" />No</p>
     <p><input type="radio" name="radiator" value="dontknow" />I don't know</p>
+    </div><div>
     <p>Do you have a chimney?</p>
     <p><input type="radio" name="chimney" value="yes" />Yes</p>
     <p><input type="radio" name="chimney" value="no" />No</p>
     <p><input type="radio" name="chimney" value="dontknow" />I don't know</p>
+    </div><div>
     <p>What is the efficiency rating of your boiler?</p>
     <p><input type="radio" name="boiler" value="G" />G</p>
     <p><input type="radio" name="boiler" value="F" />F</p>
@@ -36,14 +43,17 @@
     <p><input type="radio" name="boiler" value="D" />D</p>
     <p><input type="radio" name="boiler" value="C+" />C or better</p>
     <p><input type="radio" name="boiler" value="dontknow" />I don't know</p>
+    </div><div>
     <p>Do you have room thermostats installed?</p>
     <p><input type="radio" name="therm" value="yes" />Yes</p>
     <p><input type="radio" name="therm" value="no" />No</p>
     <p><input type="radio" name="therm" value="dontknow" />I don't know</p>
+    </div><div>
     <p>Do you have a hot water tank?</p>
     <p><input type="radio" name="tank" value="yes" />Yes</p>
     <p><input type="radio" name="tank" value="no" />No</p>
     <p><input type="radio" name="tank" value="dontknow" />I don't know</p>
+    </div>
     <!-- Submit -->
     <p><input type="submit" value="Submit" /></p>
     </form>
