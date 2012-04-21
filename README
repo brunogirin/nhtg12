@@ -1,0 +1,35 @@
+This is a small web calculator written by Bruno Girin for Rewired State
+National Hack The Government Day, 2012. It uses a small data set on home
+insulation options for 3-bedroom semi-detached houses, provided as an Excel
+file in the day's dataset:
+
+datasets/decc/est/est-3-bed-semi-data.xlsx
+
+This file was converted to CSV prior to being used so that it can easily be
+read using the python language.
+
+The resulting application is a small stand-alone web application. It uses
+a web server script found at this address:
+
+http://code.activestate.com/recipes/392879-my-first-application-server/
+
+The only modification to the script is to start the web server on port 8080
+rather than port 80 so that it can be run as a non-privileged user.
+
+How to start the web server:
+$ python ScriptServer.py
+
+You can then navigate to the web page at this address:
+http://localhost:8080
+
+The application asks a number of questions about your house and finds suitable
+energy efficiency improvements. It displays a number of data items for each
+method, in particular the costs, savings and number of years needed for the
+investment to pay for itself.
+
+Things that can be improved:
+- The presentation is very basic and would benefit from artwork and styling,
+- The code is not very pythonic and could be significantly improved,
+- The list of items returned should be ordered based on savings (either monetary
+  or carbon savings) and grouped into categories.
+
