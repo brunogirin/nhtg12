@@ -35,26 +35,27 @@
 
 <p><strong>Prototype for Rewired State National Hack The Government Day, 2012</strong></p>
 
-<p>This is a small web calculator written by Bruno Girin for Rewired State National Hack The Government Day, 2012. It uses a small data set on home insulation options for 3-bedroom semi-detached houses, provided as an Excel file in the day's <a href="https://github.com/rewiredstate/nhtg12">dataset</a>:</p>
+<h2>The project</h2>
+
+<p>This is a small web calculator written by Bruno Girin for <a href="http://rewiredstate.org/">Rewired State</a> <a href="http://rewiredstate.org/events/nhtg12">National Hack The Government Day, 2012</a>. It uses a small data set on home insulation options for 3-bedroom semi-detached houses, provided as an Excel file in the day's <a href="https://github.com/rewiredstate/nhtg12">dataset</a>:</p>
 
 <p><code>datasets/decc/est/est-3-bed-semi-data.xlsx</code></p>
 
 <p>This file was converted to CSV prior to being used so that it can easily be read using the python language.</p>
 
-<p>The resulting application is a small stand-alone web application. It uses a web server script found
-<a href="http://code.activestate.com/recipes/392879-my-first-application-server/">on ActiveState</a></p>
+<p>The resulting application is a small stand-alone web calculator that asks a number of questions about your house and finds suitable energy efficiency improvements. It displays a number of data items for each method, in particular the costs, savings and number of years needed for the investment to pay for itself.</p>
 
-<p>The only modification to the script is to start the web server on port 8080 rather than port 80 so that it can be run as a non-privileged user.</p>
+<img src="./images/screenshot.png" class="screenshot" />
 
-<p>How to start the web server:</p>
+<p> It uses a web server script found <a href="http://code.activestate.com/recipes/392879-my-first-application-server/">on ActiveState</a>. The only modification to the script is to start the web server on port 8080 rather than port 80 so that it can be run as a non-privileged user.</p>
+
+<h2>How to start the web server</h2>
 
 <p><code>$ python ScriptServer.py</code></p>
 
 <p>You can then navigate to the web page at this address: <a href="http://localhost:8080">http://localhost:8080</a></p>
 
-<p>The application asks a number of questions about your house and finds suitable energy efficiency improvements. It displays a number of data items for each method, in particular the costs, savings and number of years needed for the investment to pay for itself.</p>
-
-<p>Things that can be improved:</p>
+<h2>Things that can be improved:</h2>
 
 <ul>
 <li>The presentation is very basic and would benefit from artwork and styling,</li>
