@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>The data</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}main.css" />
+</head>
+<body>
+    <h1>Suggestions for making your home more energy efficient</h1>
+    {% if suggestions %}
+        <p>Based on your input, here is a list of things you could do to improve your
+        home's energy efficiency:</p>
+        <table>
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Savings per year</th>
+                    <th>Carbon reduction (kg/year)</th>
+                    <th>CO2 reduction (kg/year)</th>
+                    <th>Average cost if intalled by a pro</th>
+                    <th>Average cost if you install it yourself</th>
+                    <th>Number of years for the investment to pay back</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for s in suggestions %}
+                <tr>
+                    <td>{{ s.title }}</td>
+                    <td>{% include "energy/range.html" with min=s.saving_min max=s.saving_max %}</td>
+                    <td>{{ s.kgc_yr }}</td>
+                    <td>{{ s.kgco2_yr }}</td>
+                    <td>{{ s.cost_pro }}</td>
+                    <td>{{ s.cost_diy }}</td>
+                    <td>{% include "energy/range.html" with min=s.payback_min max=s.payback_max %}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>Unfortunately, based on your input, we have found no suggestions for you.</p>
+    {% endif %}
+    <p><a href="{% url energy.views.index %}">Start again</a></p>
+    <p>Data supplied by the <a href="http://www.energysavingtrust.org.uk/">Energy Saving Trust</a>.</p>
+</body>
+</html>

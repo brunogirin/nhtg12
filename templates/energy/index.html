@@ -1,14 +1,16 @@
+<!DOCTYPE html>
 <html>
 <head>
     <title>Your House</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <link rel="stylesheet" type="text/css" href="main.css" />
+    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}main.css" />
 </head>
 <body>
     <h1>Making your home more energy efficient</h1>
     <p>Making your house more energy efficient makes sense. But where should you start?
     Input the details of your own house in the form below and find out!</p>
-    <form name="input" action="./data.py" method="post">
+    <form name="input" action="{% url energy.views.result %}" method="post">
+    {% csrf_token %}
     <div>
     <p>Is your loft insulated?</p>
     <p><input type="radio" name="loft" value="yes270" />Yes, 270mm or more</p>

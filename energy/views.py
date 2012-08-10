@@ -1,12 +1,12 @@
+# Create your views here.
+
+from django.template import RequestContext, loader
+from django.http import HttpResponse
+
 import csv
 import math
 
-HEADER_ROW = """        <tr><th>Title</th><th>Savings per year</th>
-    <th>Carbon reduction (kg/year)</th><th>CO2 reduction (kg/year)</th>
-    <th>Average cost if intalled by a pro</th><th>Average cost if you install it yourself</th>
-    <th>Number of years for the investment to pay back</th></tr>
-"""
-
+# internal methods
 LINE_ITEM_DICT = {
     6:  'loft_full',
     7:  'loft_partial',
@@ -87,24 +87,6 @@ class DataItem(object):
             return int(math.ceil(float(val)))
         except ValueError:
             return val
-    
-    def table_row(self):
-        return "<tr>{0}</tr>".format(self.table_cells())
-        
-    def table_cells(self):
-        return "<td>{0}</td><td>{1}</td><td>{2}</td><td>{3}</td><td>{4}</td><td>{5}</td><td>{6}</td>".format(
-            self.title, self.format_range(self.saving_min, self.saving_max),
-            self.kgc_yr, self.kgco2_yr, self.cost_pro, self.cost_diy,
-            self.format_range(self.payback_min, self.payback_max)
-        )
-    
-    def format_range(self, min_val, max_val):
-        if min_val == "" and max_val == "":
-            return ""
-        elif max_val == "":
-            return min_val
-        else:
-            return "{0} to {1}".format(min_val, max_val)
 
 class DataSet(object):
     def __init__(self, dataReader):
@@ -115,45 +97,29 @@ class DataSet(object):
                 self.__items[LINE_ITEM_DICT[i]] = DataItem(row)
             i = i + 1
     
-    def suggest_items(self, request):
+    def suggest_items(self, params):
         suggestions = []
-        for f in request:
-            fv = request[f][0]
-            if fv in INPUT_SUGG_DICT[f]:
-                suggestions.extend([self.__items[k] for k in INPUT_SUGG_DICT[f][fv]])
+        for s, sr in INPUT_SUGG_DICT.items():
+            if s in params and params[s] in sr:
+                suggestions.extend(self.__items[k] for k in sr[params[s]])
         suggestions.extend([self.__items[k] for k in INPUT_SUGG_DICT['always']])
         return suggestions
 
-print """<html>
-<head>
-    <title>The data</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <link rel="stylesheet" type="text/css" href="main.css" />
-</head>
-<body>
-    <h1>Suggestions for making your home more energy efficient</h1>
-"""
+# view methods
+def index(request):
+    t = loader.get_template('energy/index.html')
+    c = RequestContext(request, {
+    })
+    return HttpResponse(t.render(c))
 
-dataReader = csv.reader(open('est-3-bed-semi-data.csv', 'rb'), delimiter=',', quotechar='"')
-dataSet = DataSet(dataReader)
-suggestions = dataSet.suggest_items(request)
-
-if len(suggestions) == 0:
-    print """<p>Unfortunately, based on your input, we have found no suggestions for you.</p>
-    """
-else:
-    print """
-    <p>Based on your input, here is a list of things you could do to improve your
-    home's energy efficiency:</p>
-    <table>{0}
-    """.format(HEADER_ROW)
-    for row in suggestions:
-        print row.table_row()
-    print """    </table>"""
-
-print """
-    <p><a href="./index.html">Start again</a></p>
-    <p>Data supplied by the <a href="http://www.energysavingtrust.org.uk/">Energy Saving Trust</a>.</p>
-</body>
-</html>"""
+def result(request):
+    dataReader = csv.reader(open('./energy/est-3-bed-semi-data.csv', 'rb'), delimiter=',', quotechar='"')
+    dataSet = DataSet(dataReader)
+    suggestions = dataSet.suggest_items(request.POST)
+    # build the page
+    t = loader.get_template('energy/result.html')
+    c = RequestContext(request, {
+        'suggestions': suggestions,
+    })
+    return HttpResponse(t.render(c))
 

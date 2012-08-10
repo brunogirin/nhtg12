@@ -1,0 +1,9 @@
+{% if min and max %}
+    {{ min }} to {{ max }}
+{% elif min %}
+    {{ min }}
+{% elif max %}
+    {{ max }}
+{% else %}
+    -
+{% endif %}
